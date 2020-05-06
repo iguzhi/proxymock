@@ -117,9 +117,6 @@ macProxyManager.getProxyState = () => {
   return result;
 };
 
-macProxyManager.enableBrowserProxy = () => ''
-
-macProxyManager.disableBrowserProxy = () => ''
 
 /**
  * ------------------------------------------------------------------------
@@ -137,28 +134,39 @@ winProxyManager.enableGlobalProxy = (ip, port) => {
     return;
   }
 
-  return execSync(
+  const result = execSync(
     // set proxy
     'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyServer /t REG_SZ /d ${ip}:${port} /f & '
       .replace('${ip}', ip)
       .replace('${port}', port) +
 
     // enable proxy
-    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f');
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f'
+  );
+  return result;
 };
 
-winProxyManager.disableGlobalProxy = () => execSync('reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyEnable /t REG_DWORD /d 0 /f');
+winProxyManager.disableGlobalProxy = () => {
+  const result = execSync(
+    'reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings" /v ProxyEnable /t REG_DWORD /d 0 /f'
+  );
+  return result;
+}
 
 winProxyManager.getProxyState = () => ''
 
 winProxyManager.getNetworkType = () => ''
 
-winProxyManager.enableBrowserProxy = (ip, port) => {
-  return execSync(__dirname + `proxysetting http=${ip}:${port} https=${ip}:${port}`);
-};
+function reflushProxySetting () {
+  return execSync(__dirname + 'proxysetting reflush');
+}
 
-winProxyManager.disableBrowserProxy = () => {
-  return execSync(__dirname + 'proxysetting stop');
-};
+// winProxyManager.enableBrowserProxy = (ip, port) => {
+//   return execSync(__dirname + `proxysetting http=${ip}:${port} https=${ip}:${port}`);
+// };
+
+// winProxyManager.disableBrowserProxy = () => {
+//   return execSync(__dirname + 'proxysetting stop');
+// };
 
 module.exports = /^win/.test(process.platform) ? winProxyManager : macProxyManager;

@@ -14,7 +14,7 @@ namespace proxysetting
         private const string regeditKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings";
         private List<string> proxyLibs = new List<string>();
 
-        private void Reflush()
+        public void Reflush()
         {
             InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
             InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);

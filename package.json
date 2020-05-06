@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/iguzhi/proxymock/issues"
   },
-  "homepage": "https://github.com/iguzhi/proxymock#readme"
+  "homepage": "https://github.com/iguzhi/proxymock#readme",
+  "dependencies": {
+    "portfinder": "^1.0.26"
+  }
 }
