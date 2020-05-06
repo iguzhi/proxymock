@@ -30,34 +30,34 @@ exports.isDirectory = (p) => {
   return false;
 }
 
-exports.writeFile = (fn, data, callback) => {
-  let cnt_md5 = crypto.createHash('md5').update(data).digest('hex');
-  if (isFile(fn) && md5File.sync(fn) === cnt_md5) {
+exports.writeFile = (filepath, data, callback) => {
+  let cntMd5 = crypto.createHash('md5').update(data).digest('hex');
+  if (isFile(filepath) && md5File.sync(filepath) === cntMd5) {
     callback();
   }
   else {
-    console.log(`md5 not match, save new content to: [${fn}].`);
-    fs.writeFile(fn, data, 'utf-8', callback);
+    console.log(`md5 not match, save new content to: [${filepath}].`);
+    fs.writeFile(filepath, data, 'utf-8', callback);
   }
 }
 
-exports.pWriteFile = (fn, data) => {
+exports.pWriteFile = (filepath, data) => {
   return new Promise((resolve, reject) => {
-    writeFile(fn, data, (e, v) => e ? reject(e) : resolve(v));
+    writeFile(filepath, data, (e, v) => e ? reject(e) : resolve(v));
   });
 }
 
-exports.readFile = (fn, callback) => {
-  if (!isFile(fn)) {
+exports.readFile = (filepath, callback) => {
+  if (!isFile(filepath)) {
     callback(null, '');
   }
   else {
-    fs.readFile(fn, 'utf-8', callback);
+    fs.readFile(filepath, 'utf-8', callback);
   }
 }
 
-exports.pReadFile = (fn) => {
+exports.pReadFile = (filepath) => {
   return new Promise((resolve, reject) => {
-    readFile(fn, (e, v) => e ? reject(e) : resolve(v));
+    readFile(filepath, (e, v) => e ? reject(e) : resolve(v));
   });
 }

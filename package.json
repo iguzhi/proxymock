@@ -1,6 +1,6 @@
 {
-  "name": "proxymock",
-  "version": "0.0.1",
+  "name": "node-proxymock",
+  "version": "0.0.2",
   "description": "proxy and mock",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   "dependencies": {
     "anyproxy": "^4.1.2",
     "chrome-remote-interface": "^0.28.2",
+    "cors": "^2.8.5",
     "md5-file": "^5.0.0",
     "portfinder": "^1.0.26"
   },
