@@ -1,25 +1,5 @@
-const { setProxy, unsetProxy } = require('../lib/proxy/systemProxy');
-const express = require('express');
-const cors = require('cors');
-const http = require('http');
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
 const portfinder = require('portfinder');
-const Proxy = require('../tunnel/proxy');
-
-/**
- * create server
- * @param {Integer} port 
- * @param {Object} router 
- * {
- *    'POST /user': function(req, res, next) {},
- *    'GET /session': function(req, res, next) {}
- * }
- */
-function createServer({ httpPort, httpsPort, router = {} }) {
-  
-}
+const Proxy = require('../lib/proxy');
 
 module.exports = ({ router }) => {
   let px;
@@ -33,13 +13,12 @@ module.exports = ({ router }) => {
     // `port` is guaranteed to be a free port
     // in this scope.
     //
-    // createProxyServer(port);
-    // const result = setProxy('127.0.0.1', port);
-    // console.log(result.status === 0 ? `启动代理成功(127.0.0.1:${port})` : result.stderr);
     px = new Proxy({
       port,
       dns: {
-        type: 'https'
+        type: 'https', // 'tls' or 'https'
+        server: 'https://cloudflare-dns.com/dns-query',
+        cacheSize: 1000,
       }
     });
     px.start({setProxy: true})
