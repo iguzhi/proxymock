@@ -1,8 +1,8 @@
-const proxymock = require('../index');
+const { hostsmock } = require('../../index');
 const path = require('path');
 
-proxymock({
-  hostsConfPath: path.resolve(__dirname + './myhosts'),
+hostsmock({
+  hostsConfPath: path.resolve(__dirname + '/myhosts'),
   httpPort: 80, // optional, default 80
   httpsPort: 443, // optional, default 443
   router: {

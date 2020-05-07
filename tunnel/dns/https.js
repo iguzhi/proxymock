@@ -13,7 +13,9 @@ class DNSOverHTTPS extends BaseDNS {
 
 	async _lookup(hostname) {
 		const result = await dohQueryAsync({url: this.dnsServer}, [{type: 'A', name: hostname}]);
-		return result.answers[0].data;
+		const answers = result.answers;
+		const firstAnswer = answers && answers[0];
+		return firstAnswer && firstAnswer.data;
 	}
 }
 

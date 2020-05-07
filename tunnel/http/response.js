@@ -24,7 +24,7 @@ class HTTPResponse {
 		request.httpVersion = firstLineParts[0];
 		request.statusCode = firstLineParts[1];
 		request.statusMessgae = firstLineParts[2];
-
+		
 		return request;
 	}
 
@@ -39,7 +39,7 @@ class HTTPResponse {
 
 		result += '\r\n';
 		result += this.payload;
-
+		
 		return result;
 	}
 }

@@ -24,6 +24,7 @@ async function handleHTTP(clientSocket, firstChunk, proxy) {
 	tryWrite(serverSocket, interceptRequest(firstChunk), close);
 
 	serverSocket.on('data', data => {
+		console.log('[HTTP] receive data: ', data.toString())
 		tryWrite(clientSocket, data, close);
 	});
 

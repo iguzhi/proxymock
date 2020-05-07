@@ -1,4 +1,4 @@
-function bufferToChunks(buffer, chunkSize) {
+exports.bufferToChunks = function (buffer, chunkSize) {
 	const result = [];
 	const len = buffer.length;
 	let i = 0;
@@ -9,5 +9,3 @@ function bufferToChunks(buffer, chunkSize) {
 
 	return result;
 }
-
-module.exports = bufferToChunks;

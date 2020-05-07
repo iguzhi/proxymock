@@ -34,23 +34,7 @@ const validMethods = [
 	'UNLINK'
 ];
 
-exports.parseRequest = function (rawRequest) {
-	const mainParts = rawRequest.split('\r\n\r\n');
-	const headersPart = mainParts[0];
-	const payload = mainParts[1];
 
-	const headerLines = headersPart.split('\r\n');
-	const firsLine = headerLines.shift();
-
-	const firstLineParts = firsLine.split(/\s+/);
-	const headers = parseHeaders(headerLines);
-
-	return {
-		firstLineParts,
-		headers,
-		payload
-	};
-}
 
 exports.parseHeaders = function (headerLines) {
 	const headers = {};
@@ -61,6 +45,24 @@ exports.parseHeaders = function (headerLines) {
 	}
 
 	return headers;
+}
+
+exports.parseRequest = function (rawRequest) {
+	const mainParts = rawRequest.split('\r\n\r\n');
+	const headersPart = mainParts[0];
+	const payload = mainParts[1];
+
+	const headerLines = headersPart.split('\r\n');
+	const firsLine = headerLines.shift();
+
+	const firstLineParts = firsLine.split(/\s+/);
+	const headers = exports.parseHeaders(headerLines);
+
+	return {
+		firstLineParts,
+		headers,
+		payload
+	};
 }
 
 exports.isConnectMethod = function (rawInput) {

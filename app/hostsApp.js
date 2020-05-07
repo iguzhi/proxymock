@@ -1,4 +1,4 @@
-const { backupSysHostsConf, restoreSysHostsConf, useHostsConf } = require('../lib/hostsAction');
+const { backupSysHostsConf, restoreSysHostsConf, useHostsConf } = require('../lib/hosts/hostsAction');
 const express = require('express');
 const cors = require('cors');
 const http = require('http');

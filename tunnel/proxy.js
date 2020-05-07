@@ -1,9 +1,8 @@
 const net = require('net');
-const { setProxy, unsetProxy } = require('./utils/systemProxy');
+const { setProxy, unsetProxy } = require('../lib/proxy/systemProxy');
 const handleRequest = require('./handlers/request');
 const DNSOverTLS = require('./dns/tls');
 const DNSOverHTTPS = require('./dns/https');
-const { appInit } = require('./utils/analytics');
 const config = require('./config');
 
 class Proxy {
@@ -12,7 +11,6 @@ class Proxy {
 		this.server = undefined;
 		this.isSystemProxySet = false;
 		this.initDNS();
-		appInit(customConfig.source);
 	}
 
 	initDNS() {
@@ -42,11 +40,11 @@ class Proxy {
 			this.server.listen(this.config.port, this.config.ip, () => resolve());
 		});
 
-		const {address, port} = this.server.address();
+		const { address, port } = this.server.address();
 		console.debug(`server listen on ${address} port ${port}`);
 
 		if (options.setProxy) {
-			await setProxy(address, port);
+			setProxy(address, port);
 			this.isSystemProxySet = true;
 			console.debug('system proxy set');
 		}
@@ -56,9 +54,9 @@ class Proxy {
 		if (this.server) {
 			this.server.close();
 		}
-
+		
 		if (this.isSystemProxySet) {
-			await unsetProxy();
+			unsetProxy();
 			this.isSystemProxySet = false;
 			console.debug('system proxy unset');
 		}
