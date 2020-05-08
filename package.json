@@ -33,7 +33,6 @@
     "lodash": "^4.17.15",
     "log4js": "^6.2.1",
     "lru-cache": "^5.1.1",
-    "md5-file": "^5.0.0",
     "node-fetch": "^2.6.0",
     "portfinder": "^1.0.26",
     "validator": "^10.11.0",

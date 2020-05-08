@@ -1,8 +1,8 @@
 const createServer = require('../lib/proxy2');
 const { setProxy, unsetProxy } = require('../lib/proxy/utils/systemProxy');
 createServer({
-  httpPort: 8001, // optional, default 80
-  httpsPort: 8002, // optional, default 443
+  httpPort: 80, // optional, default 80
+  httpsPort: 443, // optional, default 443
   router: {
     'GET /data/one': (req, res, next) => {
       res.json({ a: 1 });

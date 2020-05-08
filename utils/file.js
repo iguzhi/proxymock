@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const crypto = require('crypto');
-const md5File = require('md5-file');
 const path = require('path');
 
 /**
@@ -92,8 +91,17 @@ exports.isDirectory = (p) => {
 
 exports.writeFile = (filepath, data, callback) => {
   let cntMd5 = crypto.createHash('md5').update(data).digest('hex');
-  if (isFile(filepath) && md5File.sync(filepath) === cntMd5) {
-    callback();
+  if (isFile(filepath)) {
+    exports.readFile(filepath, (err, content) => {
+      if (err) {
+        console.error(`read file error: [${filepath}].`);
+        return;
+      }
+      let contentMd5 = crypto.createHash('md5').update(content).digest('hex');
+      if (contentMd5 === cntMd5) {
+        callback();
+      }
+    });
   }
   else {
     console.log(`md5 not match, save new content to: [${filepath}].`);
@@ -103,7 +111,7 @@ exports.writeFile = (filepath, data, callback) => {
 
 exports.pWriteFile = (filepath, data) => {
   return new Promise((resolve, reject) => {
-    writeFile(filepath, data, (e, v) => e ? reject(e) : resolve(v));
+    exports.writeFile(filepath, data, (e, v) => e ? reject(e) : resolve(v));
   });
 }
 
@@ -118,6 +126,6 @@ exports.readFile = (filepath, callback) => {
 
 exports.pReadFile = (filepath) => {
   return new Promise((resolve, reject) => {
-    readFile(filepath, (e, v) => e ? reject(e) : resolve(v));
+    exports.readFile(filepath, (e, v) => e ? reject(e) : resolve(v));
   });
 }
