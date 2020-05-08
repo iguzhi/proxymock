@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/iguzhi/proxymock#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
     "chrome-remote-interface": "^0.28.2",
     "cors": "^2.8.5",
     "dns-over-http": "^0.1.2",
