@@ -1,5 +1,13 @@
 # proxymock
-proxy and mock
+类似fiddler的编程式代理mock工具
+
+## 如何使用
+
+1. `npm install node-proxymock --save` 或 `yarn add node-proxymock`
+
+2. 参考test
+
+## 参考以下分享、感谢作者
 
 [CDN的基本工作过程](https://www.cnblogs.com/xuan52rock/p/6844818.html)
 
