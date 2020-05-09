@@ -1,19 +1,15 @@
-const _ = require('lodash');
 const portfinder = require('portfinder');
 const createWebServers = require('./lib/servers/webServers');
 const createProxyServer = require('./lib/servers/proxyServer');
-const { caConf, proxyServerConf } = require('./config');
 
 /**
  * 启动服务
  * @param {Object} { ca, proxyServer, router } 
  */
-async function start({ ca, proxyServer, router }) {
-  ca = _.merge({}, caConf, ca || {});
+async function start({ ca = {}, proxyServer = {}, router, setSystemProxy = false }) {
   const { httpPort, httpsPort } = await createWebServers(ca, router);
 
-  proxyServer = _.merge({}, proxyServerConf, proxyServer);
-  let { httpServer, httpsServer, ip, port, setSystemProxy } = proxyServer;
+  let { httpServer, httpsServer, ip, port } = proxyServer;
   if (!httpServer) {
     httpServer = {};
   }

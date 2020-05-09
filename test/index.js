@@ -4,7 +4,8 @@ const start = require('../index');
 start({
   router: {
     
-  }
+  },
+  // setSystemProxy: true
 });
 
 
