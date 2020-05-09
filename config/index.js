@@ -11,3 +11,22 @@ exports.loggerConf = { // 日志配置
     socket: 'debug',
   }
 };
+
+exports.caConf = {
+  key: '',
+  cert: ''
+};
+
+exports.proxyServerConf = {
+  httpServer: {
+    // ip: '127.0.0.1',
+    // port: 80
+  },
+  httpsServer: {
+    // ip: '127.0.0.1',
+    // port: 443
+  },
+  // ip: '127.0.0.1',
+  // port: 8000,
+  setSystemProxy: true
+};

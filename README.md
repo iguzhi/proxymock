@@ -24,3 +24,11 @@ proxy and mock
 [HTTP协议 (七) Cookie](http://www.cnblogs.com/TankXiao/archive/2013/04/15/2848906.html)
 
 [利用nodejs搭建 https 代理服务器并实现中间人攻击](https://juejin.im/post/5cce881ef265da036902a934)
+
+[编写了一个HTTP高匿代理](https://blog.csdn.net/laotse/article/details/5903651)
+
+[用c#编写socks代理服务器，大白话细述协议的最重要部分。](https://blog.csdn.net/laotse/article/details/6296573)
+
+[加密的TCP通讯全过程](https://blog.csdn.net/laotse/article/details/5910378)
+
+[c#做端口转发程序支持正向连接和反向链接](https://blog.csdn.net/laotse/article/details/5874778)
