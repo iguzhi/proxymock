@@ -1,4 +1,4 @@
-const proxyMock = require('../index');
+const { proxyMock } = require('../index');
 
 proxyMock({
   rules: {
@@ -20,7 +20,7 @@ proxyMock({
       return req.body;
     }
   },
-  // setSystemProxy: true // 是否设置系统代理
+  setSystemProxy: true // 是否设置系统代理
 });
 
 process.on('uncaughtException', (err) => {
