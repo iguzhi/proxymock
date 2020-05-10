@@ -3,11 +3,11 @@ exports.loggerConf = { // 日志配置
   defaultLevel: 'info',
   level: {
     default: 'info', // 默认
-    http: 'debug',
-    https: 'debug',
-    request: 'debug',
-    proxy: 'debug',
-    dns: 'debug',
-    socket: 'debug',
+    http: 'error',
+    https: 'error',
+    request: 'error',
+    proxy: 'error',
+    dns: 'error',
+    socket: 'error',
   }
 };

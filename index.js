@@ -2,7 +2,7 @@ const portfinder = require('portfinder');
 const { createWebServers, createExpress, createHttpServer, createHttpsServer } = require('./lib/servers/webServers');
 const { createProxyServer } = require('./lib/servers/proxyServer');
 const { setProxy, unsetProxy } = require('./lib/utils/systemProxy');
-const { getLogger } = require('./utils/logger');
+const { getLogger, setLevel } = require('./utils/logger');
 const logger = getLogger('default');
 
 /**
@@ -11,9 +11,12 @@ const logger = getLogger('default');
  * @param {Object} proxyServer { httpServer, httpsServer, ip, port } 指定proxy服务器绑定的ip和port及其将转发到的web服务器配置
  * @param {Object} rules { [req.method + ' ' + req.path]: {Object|Function} } 拦截请求和响应请求的规则
  * @param {Boolean} setSystemProxy 是否设置系统代理
+ * @param {Object|String} logLevelConf 日志级别设置
  * httpServer、httpsServer: { ip, port }
  */
-async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false }) {
+async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false }, logLevelConf) {
+  logLevelConf && setLevel(logLevelConf);
+
   let { httpServer = {}, httpsServer = {}, ip, port } = proxyServer;
   const hasNecessaryHttpConf = httpServer.ip && httpServer.port;
   const hasNecessaryHttpsConf = httpsServer.ip && httpsServer.port;

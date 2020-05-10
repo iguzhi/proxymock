@@ -36,7 +36,7 @@ _.forEach(configure.appenders, function(appender, category) {
  */
 exports.setLevel = (category, level) => {
   if (level) {
-    logger[category].level = level;
+    logger.hasOwnProperty(category) && (logger[category].level = level);
   }
   else {
     level = category;
