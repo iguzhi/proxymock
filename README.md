@@ -1,6 +1,9 @@
 # proxymock
-类似fiddler的编程式代理mock工具,
+类似fiddler的编程式代理mock工具
+
 启用了3个端口, 代理服务器转发到http server和https server, 最终在express中集中处理
+
+实际上只需要2个端口就可以实现同样的功能, 但3个端口可以做的事情更多, 比如http Server和https Server可以和proxy Server部署在不同的机器上, 实现Proxy Server向不同机器转发请求
 
 ## 如何使用
 
