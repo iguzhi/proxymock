@@ -18,7 +18,11 @@ proxyMock({
     },
     'POST https://test.abc.com/api/mini/go.do': async(req, res, rawData) => {
       return req.body;
-    }
+    },
+    '^ GET http://g.iguzhi.com/api/s.json': { // 以 ^ 开头的规则不会发送真实请求而直接返回这里的mock数据
+      a: 1,
+      b: 2
+    },
   },
   setSystemProxy: true // 是否设置系统代理
 });
