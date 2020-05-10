@@ -24,7 +24,7 @@ proxyMock({
       b: 2
     },
     'GET https://www.jb51.net/skin/2019/css/base.css': '123',
-    'GET https://www.jb51.net/article/135310.htm': (req, res, rawData) => {
+    'GET https://www.jb51.net/article/1353101.htm': (req, res, rawData) => {
       return `
         <html>
           <title>Hello ProxyMock</title>
