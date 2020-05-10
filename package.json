@@ -1,6 +1,6 @@
 {
   "name": "node-proxymock",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "proxy and mock",
   "main": "index.js",
   "scripts": {
