@@ -23,14 +23,15 @@ proxyMock({
       a: 1,
       b: 2
     },
+    'GET https://www.jb51.net/skin/2019/css/base.css': '123',
+    'GET https://www.jb51.net/article/135310.htm': (req, res, rawData) => {
+      return `
+        <html>
+          <title>Hello ProxyMock</title>
+          <body>类似fiddler的编程式代理mock工具</body>
+        </html>
+      `
+    },
   },
   setSystemProxy: true // 是否设置系统代理
-});
-
-process.on('uncaughtException', (err) => {
-  console.error('uncaughtException', err)
-});
-
-process.on('unhandledRejection', (err) => {
-  console.error('unhandledRejection', err)
 });
