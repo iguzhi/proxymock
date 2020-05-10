@@ -12,9 +12,9 @@ proxyMock({
       await new Promise((resolve) => setTimeout(() => resolve(), 3000))
       res.json([{a:23},'ff', [24.4,22]])
     },
-    'GET http://g.iguzhi.com/api/s.json': {
-      a: 1,
-      b: 2
+    'GET http://g.iguzhi.com/api/ss.json': {
+      a: 33,
+      b: 44
     },
     'POST https://test.abc.com/api/mini/go.do': async(req, res, rawData) => {
       return req.body;
