@@ -32,7 +32,10 @@ proxyMock({
         </html>
       `
     },
-    '^ POST https://a.iguzhi.com/pmp.gif': { b: 55556666 }
+    // '^ POST https://a.iguzhi.com/pmp.gif': { b: 55556666 },
+    'GET https://i.baidu.com/map.json': (req, res, rawData) => {
+      return rawData;
+    }
   },
   setSystemProxy: true // 是否设置系统代理
 });
