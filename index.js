@@ -60,12 +60,12 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
 }
 
 process.on('uncaughtException', (error) => {
-  console.error('uncaughtException', error);
+  // console.error('uncaughtException', error);
   logger.error('uncaughtException', error);
 });
 
 process.on('unhandledRejection', (error) => {
-  console.error('unhandledRejection', error);
+  // console.error('unhandledRejection', error);
   logger.error('unhandledRejection', error);
 });
 
