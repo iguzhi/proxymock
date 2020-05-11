@@ -1,0 +1,58 @@
+{
+	"msg": "SUCCESS",
+	"code": "1",
+	"data": {
+		"msg": "",
+		"code": "success",
+		"api": "member.queryContactInfos",
+		"result": {
+			"contactPointList": [{
+				"postCde": "000000",
+				"ecifCreatedTime": "2020-03-05 23:19:55",
+				"stateName": "上海",
+				"cityName": "上海市",
+				"poiSource": "273000000020",
+				"poiId": "1040100000866021",
+				"streetName": "全区",
+				"preferFlag": "100000000020",
+				"city": "021",
+				"address": "东安路",
+				"cntctPointName": "李",
+				"fusionFlag": "1",
+				"addrNum": "6",
+				"street": "99",
+				"cntctPointType": "143000000030",
+				"ecifUpdatedTime": "2020-04-23 09:20:16",
+				"town": "03",
+				"supplyDetailAddress": "x单元",
+				"state": "020",
+				"townName": "徐汇区",
+				"poiName": "东安路",
+				"mobileNumMain": "188******50"
+			}, {
+				"postCde": "000000",
+				"ecifCreatedTime": "2020-02-14 15:38:51",
+				"stateName": "江苏省",
+				"cityName": "南京市",
+				"streetName": "全区",
+				"city": "025",
+				"preferFlag": "100000000020",
+				"ecifUpdatedTime": "2020-02-14 15:38:51",
+				"cntctPointName": "李",
+				"addrNum": "5",
+				"street": "99",
+				"address": "大行宫(地铁站)",
+				"addrTag": "",
+				"town": "03",
+				"cntctPointType": "143000000030",
+				"state": "100",
+				"townName": "秦淮区",
+				"fusionFlag": "0",
+				"mobileNumMain": "188******50"
+			}],
+			"selfServiceAddrs": {}
+		},
+		"v": "1.0",
+		"status": "success"
+	}
+}

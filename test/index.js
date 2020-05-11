@@ -32,6 +32,7 @@ proxyMock({
         </html>
       `
     },
+    '^ POST https://a.iguzhi.com/pmp.gif': { b: 55556666 }
   },
   setSystemProxy: true // 是否设置系统代理
 });
