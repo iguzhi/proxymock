@@ -7,17 +7,68 @@
 
 ## 如何使用
 
-1. `npm install node-proxymock --save` 或 `yarn add node-proxymock`
+* `yarn add node-proxymock` 或 `npm install node-proxymock --save`
 
-2. 参考test
+* `
+  const { proxyMock } = require('node-proxymock');
+
+  proxyMock({
+    rules: {
+      'GET http://e.iguzhi.com/lib/c.json': async(req, res, rawData) => {
+        return {
+          a: 5,
+          b: 6
+        }
+      },
+      'GET http://f.iguzhi.com/api/d.json': async(req, res, rawData) => {
+        await new Promise((resolve) => setTimeout(() => resolve(), 3000))
+        res.json([{a:23},'ff', [24.4,22]])
+      },
+      'GET http://g.iguzhi.com/api/ss.json': {
+        a: 33,
+        b: 44
+      },
+      'POST https://test.abc.com/api/mini/go.do': async(req, res, rawData) => {
+        return req.body;
+      },
+      '^ GET http://g.iguzhi.com/api/s.json': { // 以 ^ 开头的规则不会发送真实请求而直接返回这里的mock数据
+        a: 1,
+        b: 2
+      },
+      'GET https://www.jb51.net/skin/2019/css/base.css': '123',
+      'GET https://www.jb51.net/article/1353101.htm': (req, res, rawData) => {
+        return `
+          <html>
+            <title>Hello ProxyMock</title>
+            <body>类似fiddler的编程式代理mock工具</body>
+          </html>
+        `
+      },
+      // '^ POST https://a.iguzhi.com/pmp.gif': { b: 55556666 },
+      'GET https://i.baidu.com/map.json': (req, res, rawData) => {
+        return rawData;
+      },
+      'GET https://www.jb51.net/jslib/syntaxhighlighter/scripts/shCore.js': (req, res, rawData) => {
+        return `alert('hello proxymock')`
+      }
+    },
+    setSystemProxy: true, // 是否设置系统代理, 默认值 false
+    logLevelConf: 'info', // 日志级别, 默认值级别 info
+    noCache: true // 禁用缓存, 默认值 true
+  });
+`
+
+## 测试
+
+请参考test目录, 运行 `yarn test` 或者 `npm run test`
 
 ## response header 附加字段说明
 
 `Prxoy-Engine: ProxyMock` 表示当前资源是经过ProxyMock转发而来
 
-`Prxoy-Phase-Tag: ^` 表示当前资源由命中规则的数据直接返回, 没有向远程服务器发送真实请求; 若命中规则是函数则该函数没有第三个参数. 请注意与下一条描述的差异点
+`Prxoy-Phase-Flag: ^` 表示当前资源由命中规则的数据直接返回, 没有向远程服务器发送真实请求; 若命中规则是函数则该函数没有第三个参数. 请注意与下一条描述的差异点
 
-`Prxoy-Phase-Tag: $` 表示当前资源虽然由命中规则返回, 但是在向远程服务器发送真实请求返回真实数据后再返回命中规则的返回的数据; 如果命中规则是个函数, 那么该函数的第三个参数是真实请求返回的数据
+`Prxoy-Phase-Flag: $` 表示当前资源虽然由命中规则返回, 但是在向远程服务器发送真实请求返回真实数据后再返回命中规则的返回的数据; 如果命中规则是个函数, 那么该函数的第三个参数是真实请求返回的数据
 
 ## 参考以下分享、感谢作者
 

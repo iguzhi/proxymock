@@ -35,7 +35,12 @@ proxyMock({
     // '^ POST https://a.iguzhi.com/pmp.gif': { b: 55556666 },
     'GET https://i.baidu.com/map.json': (req, res, rawData) => {
       return rawData;
+    },
+    'GET https://www.jb51.net/jslib/syntaxhighlighter/scripts/shCore.js': (req, res, rawData) => {
+      return `alert('hello proxymock')`
     }
   },
-  setSystemProxy: true // 是否设置系统代理
+  setSystemProxy: true, // 是否设置系统代理, 默认值 false
+  logLevelConf: 'info', // 日志级别, 默认值级别 info
+  noCache: true // 禁用缓存, 默认值 true
 });

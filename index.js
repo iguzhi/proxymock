@@ -12,9 +12,10 @@ const logger = getLogger('default');
  * @param {Object} rules { [req.method + ' ' + req.path]: {Object|Function} } 拦截请求和响应请求的规则
  * @param {Boolean} setSystemProxy 是否设置系统代理
  * @param {Object|String} logLevelConf 日志级别设置
+ * @param {Boolean} noCache 禁用缓存
  * httpServer、httpsServer: { ip, port }
  */
-async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false }, logLevelConf) {
+async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false, logLevelConf, noCache = true }) {
   logLevelConf && setLevel(logLevelConf);
 
   let { httpServer = {}, httpsServer = {}, ip, port } = proxyServer;
@@ -22,7 +23,7 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
   const hasNecessaryHttpsConf = httpsServer.ip && httpsServer.port;
 
   if (!hasNecessaryHttpConf || !hasNecessaryHttpsConf) {
-    const expressApp = createExpress(rules);
+    const expressApp = createExpress(rules, noCache);
     if (!hasNecessaryHttpConf) {
       const httpPort = await portfinder.getPortPromise({ startPort: 8000, stopPort: 9999 });
       const httpServerAddress = await createHttpServer(expressApp, httpPort);
