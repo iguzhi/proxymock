@@ -9,7 +9,9 @@
 
 * `yarn add node-proxymock` 或 `npm install node-proxymock --save`
 
-* `
+* 请参考test 
+
+```
   const { proxyMock } = require('node-proxymock');
 
   proxyMock({
@@ -56,11 +58,11 @@
     logLevelConf: 'info', // 日志级别, 默认值级别 info
     noCache: true // 禁用缓存, 默认值 true
   });
-`
+```
 
 ## 测试
 
-请参考test目录, 运行 `yarn test` 或者 `npm run test`
+运行 `yarn test` 或者 `npm run test`
 
 ## response header 附加字段说明
 
