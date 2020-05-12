@@ -11,12 +11,12 @@ const logger = getLogger('default');
  * @param {Object} proxyServer { httpServer, httpsServer, ip, port } 指定proxy服务器绑定的ip和port及其将转发到的web服务器配置
  * @param {Object} rules { [req.method + ' ' + req.path]: {Object|Function} } 拦截请求和响应请求的规则
  * @param {Boolean} setSystemProxy 是否设置系统代理
- * @param {Object|String} logLevelConf 日志级别设置
+ * @param {Object|String} logLevel 日志级别设置
  * @param {Boolean} noCache 禁用缓存
  * httpServer、httpsServer: { ip, port }
  */
-async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false, logLevelConf, noCache = true }) {
-  logLevelConf && setLevel(logLevelConf);
+async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false, logLevel, noCache = true }) {
+  logLevel && setLevel(logLevel);
 
   let { httpServer = {}, httpsServer = {}, ip, port } = proxyServer;
   const hasNecessaryHttpConf = httpServer.ip && httpServer.port;
