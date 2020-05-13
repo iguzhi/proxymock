@@ -47,15 +47,15 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
 
   if (setSystemProxy) {
     await setProxy(proxyAddress.ip, proxyAddress.port);
-    console.log('%s System Proxy has been set to %s:%s', chalk.green('[proxymock]'), chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
-    logger.info('System Proxy has been set to %s:%s', chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
+    console.log('%s System Proxy is set to %s:%s', chalk.green('[proxymock]'), chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
+    logger.info('System Proxy is set to %s:%s', chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
   }
 
   process.on('SIGINT', async () => {
     if (setSystemProxy) {
       await unsetProxy();
-      console.log(chalk.green('[proxymock]'), 'System proxy has been unset');
-      logger.info('System proxy has been unset');
+      console.log(chalk.green('[proxymock]'), 'System Proxy is unset');
+      logger.info('System Proxy is unset');
     }
     process.exit();
   });
