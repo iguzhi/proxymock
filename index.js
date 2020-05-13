@@ -1,4 +1,5 @@
 const portfinder = require('portfinder');
+const chalk = require('chalk');
 const { createWebServers, createExpress, createHttpServer, createHttpsServer } = require('./lib/servers/webServers');
 const { createProxyServer } = require('./lib/servers/proxyServer');
 const { setProxy, unsetProxy } = require('./lib/utils/systemProxy');
@@ -46,14 +47,14 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
 
   if (setSystemProxy) {
     await setProxy(proxyAddress.ip, proxyAddress.port);
-    console.log('System proxy has been set to %s:%s', proxyAddress.ip, proxyAddress.port);
-    logger.info('System proxy has been set to %s:%s', proxyAddress.ip, proxyAddress.port);
+    console.log('%s System proxy has been set to %s:%s', chalk.green('[proxymock]'), chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
+    logger.info('System proxy has been set to %s:%s', chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
   }
 
   process.on('SIGINT', async () => {
     if (setSystemProxy) {
       await unsetProxy();
-      console.log('System proxy has been unset');
+      console.log(chalk.green('[proxymock]'), 'System proxy has been unset');
       logger.info('System proxy has been unset');
     }
     process.exit();
