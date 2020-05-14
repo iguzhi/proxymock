@@ -52,13 +52,24 @@
       },
       'GET https://www.jb51.net/jslib/syntaxhighlighter/scripts/shCore.js': (req, res, rawData) => {
         return `alert('hello proxymock')`
-      }
+      },
+      '^ GET /iguzhi\.com\/regexp\/test\.json/i': 'test regexp match' // 支持正则
     },
     setSystemProxy: true, // 是否设置系统代理, 默认值 false
     logLevel: 'info', // 日志级别, 默认值级别 info
     disableCache: true // 禁用缓存, 默认值 true
   });
 ```
+
+## 匹配规则优先级
+
+* 通过 `req.method`、`req.protocol + '://' + req.hostname + req.path` 与 配置的规则进行比对
+
+* 优先 `===` 比对, 比对失败再进行正则比对
+
+* 正则比对时, `req.method`依然是`===`比对, `req.protocol + '://' + req.hostname + req.path`部分使用正则比对
+
+* 进入到正则比对时, 如果有多个正则规则, 那么遇到第一个匹配成功的规则后终止后续规则比对
 
 ## 测试
 

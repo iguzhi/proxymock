@@ -38,7 +38,8 @@ proxyMock({
     },
     'GET https://www.jb51.net/jslib/syntaxhighlighter/scripts/shCore.js': (req, res, rawData) => {
       return `alert('hello proxymock')`
-    }
+    },
+    '^ GET /iguzhi\.com\/regexp\/test\.json/i': 'test regexp match'
   },
   setSystemProxy: true, // 是否设置系统代理, 默认值 false
   logLevel: 'info', // 日志级别, 默认值级别 info
