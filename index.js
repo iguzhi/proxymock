@@ -1,6 +1,6 @@
 const portfinder = require('portfinder');
 const chalk = require('chalk');
-const { createWebServers, createExpress, createHttpServer, createHttpsServer } = require('./lib/servers/webServers');
+const { createWebServers, createExpress, createHttpServer, createHttpsServer, getState } = require('./lib/servers/webServers');
 const { createProxyServer } = require('./lib/servers/proxyServer');
 const { setProxy, unsetProxy } = require('./lib/utils/systemProxy');
 const { parseRegExpRule, parseRegExpRules } = require('./lib/utils/ruleParser');
@@ -80,5 +80,6 @@ module.exports = {
   createHttpsServer,
   createProxyServer,
   parseRegExpRule,
-  parseRegExpRules
+  parseRegExpRules,
+  getState
 };
