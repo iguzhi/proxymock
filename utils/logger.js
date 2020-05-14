@@ -9,7 +9,6 @@ const logger = {};
 
 function initLogger(logsDir) {
   logsDir = logsDir || require('path').resolve(getUserHome(), './.proxymock/logs/');
-  console.log(logsDir)
   ensureDirExists(logsDir);
 
   const configure = {
