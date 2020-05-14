@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const { createWebServers, createExpress, createHttpServer, createHttpsServer } = require('./lib/servers/webServers');
 const { createProxyServer } = require('./lib/servers/proxyServer');
 const { setProxy, unsetProxy } = require('./lib/utils/systemProxy');
+const { parseRegExpRule, parseRegExpRules } = require('./lib/utils/ruleParser');
 const { getLogger, setLevel } = require('./utils/logger');
 const logger = getLogger('default');
 
@@ -48,14 +49,14 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
   if (setSystemProxy) {
     await setProxy(proxyAddress.ip, proxyAddress.port);
     console.log('%s System Proxy is set to %s:%s', chalk.green('[proxymock]'), chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
-    logger.info('System Proxy is set to %s:%s', chalk.yellow(proxyAddress.ip), chalk.yellow(proxyAddress.port));
+    logger.info('[proxymock] System Proxy is set to %s:%s', proxyAddress.ip, proxyAddress.port);
   }
 
   process.on('SIGINT', async () => {
     if (setSystemProxy) {
       await unsetProxy();
       console.log(chalk.green('[proxymock]'), 'System Proxy is unset');
-      logger.info('System Proxy is unset');
+      logger.info('[proxymock] System Proxy is unset');
     }
     process.exit();
   });
@@ -77,5 +78,7 @@ module.exports = {
   createExpress,
   createHttpServer,
   createHttpsServer,
-  createProxyServer
+  createProxyServer,
+  parseRegExpRule,
+  parseRegExpRules
 };
