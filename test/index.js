@@ -39,7 +39,26 @@ proxyMock({
     'GET https://www.jb51.net/jslib/syntaxhighlighter/scripts/shCore.js': (req, res, rawData) => {
       return `alert('hello proxymock')`
     },
-    '^ GET /iguzhi\.com\/regexp\/test\.json/i': 'test regexp match'
+    '^ GET /iguzhi\.com\/regexp\/test\.json/i': 'test regexp match',
+    '^ GET /weather\.[a-z]{2,4}\.cn\/api/': async function(req, res, rawData) {
+      await new Promise(resolve => setTimeout(() => resolve(), 3000)); // 模拟请求延迟3秒
+      // console.log(req.query)
+      if (req.query.type === 'hot') {
+        return {
+          desc: '艳阳当空、烈日炎炎',
+          temperature: 38,
+          feeling: 'hot'
+        };
+      }
+      
+      if (req.query.type === 'cold') {
+        res.json({
+          desc: '大雪纷飞、寒风刺骨',
+          temperature: -25,
+          feeling: 'cold'
+        });
+      }
+    }
   },
   setSystemProxy: true, // 是否设置系统代理, 默认值 false
   logLevel: 'info', // 日志级别, 默认值级别 info
