@@ -4,7 +4,7 @@ const { createWebServers, createExpress, createHttpServer, createHttpsServer, ge
 const { createProxyServer } = require('./lib/servers/proxyServer');
 const { setProxy, unsetProxy } = require('./lib/utils/systemProxy');
 const { parseRegExpRule, parseRegExpRules } = require('./lib/utils/ruleParser');
-const { getLogger, setLevel } = require('./utils/logger');
+const { getLogger, setLevel } = require('./lib/utils/logger');
 const logger = getLogger('default');
 
 /**
