@@ -50,7 +50,7 @@ proxyMock({
           feeling: 'hot'
         };
       }
-      
+
       if (req.query.type === 'cold') {
         res.json({
           desc: '大雪纷飞、寒风刺骨',
@@ -60,7 +60,7 @@ proxyMock({
       }
     }
   },
-  setSystemProxy: false, // 是否设置系统代理, 默认值 false
+  setSystemProxy: true, // 是否设置系统代理, 默认值 false
   logLevel: 'info', // 日志级别, 默认值级别 info
   disableCache: true // 禁用缓存, 默认值 true
 });

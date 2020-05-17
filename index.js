@@ -4,6 +4,7 @@ const { createWebServers, createExpress, createHttpServer, createHttpsServer, ge
 const { createProxyServer } = require('./lib/servers/proxyServer');
 const { setProxy, unsetProxy } = require('./lib/utils/systemProxy');
 const { parseRegExpRule, parseRegExpRules } = require('./lib/utils/ruleParser');
+const { generateRootCA, getCAStatus, trustRootCA } = require('./lib/utils/certMgr');
 const { getLogger, setLevel } = require('./lib/utils/logger');
 const logger = getLogger('default');
 
@@ -20,31 +21,15 @@ const logger = getLogger('default');
 async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy = false, logLevel, disableCache = true }) {
   logLevel && setLevel(logLevel);
 
-  let { httpServer = {}, httpsServer = {}, ip, port } = proxyServer;
-  const hasNecessaryHttpConf = httpServer.ip && httpServer.port;
-  const hasNecessaryHttpsConf = httpsServer.ip && httpsServer.port;
+  let { ip, port } = proxyServer;
 
-  if (!hasNecessaryHttpConf || !hasNecessaryHttpsConf) {
-    const expressApp = createExpress(rules, disableCache);
-    if (!hasNecessaryHttpConf) {
-      const httpPort = await portfinder.getPortPromise({ startPort: 8000, stopPort: 9999 });
-      const httpServerAddress = await createHttpServer(expressApp, httpPort);
-      httpServer.ip = httpServerAddress.ip;
-      httpServer.port = httpServerAddress.port;
-    }
-    if (!hasNecessaryHttpsConf) {
-      const httpsPort = await portfinder.getPortPromise({ startPort: 8000, stopPort: 9999 });
-      const httpsServerAddress = await createHttpsServer(expressApp, httpsPort, ca);
-      httpsServer.ip = httpsServerAddress.ip;
-      httpsServer.port = httpsServerAddress.port;
-    }
-  }
+  const expressApp = createExpress(rules, disableCache);
 
   if (!port) {
     port = await portfinder.getPortPromise({ startPort: 8000, stopPort: 9999 });
   }
 
-  const proxyAddress = await createProxyServer({ ip, port, httpsServer, httpServer });
+  const proxyAddress = await createProxyServer({ ip, port, app: expressApp });
 
   if (setSystemProxy) {
     await setProxy(proxyAddress.ip, proxyAddress.port);
@@ -63,12 +48,12 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
 }
 
 process.on('uncaughtException', (error) => {
-  // console.error('uncaughtException', error);
+  console.error('uncaughtException', error);
   logger.error('uncaughtException', error);
 });
 
 process.on('unhandledRejection', (error) => {
-  // console.error('unhandledRejection', error);
+  console.error('unhandledRejection', error);
   logger.error('unhandledRejection', error);
 });
 
@@ -81,5 +66,9 @@ module.exports = {
   createProxyServer,
   parseRegExpRule,
   parseRegExpRules,
-  getState
+  getState,
+  // CA
+  generateRootCA,
+  getCAStatus,
+  trustRootCA
 };

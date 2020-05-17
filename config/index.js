@@ -9,5 +9,6 @@ exports.loggerConf = { // 日志配置
     proxy: 'info',
     dns: 'info',
     socket: 'info',
+    cert: 'info',
   }
 };
