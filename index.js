@@ -26,7 +26,7 @@ async function proxyMock({ ca = {}, proxyServer = {}, rules = {}, setSystemProxy
   const expressApp = createExpress(rules, disableCache);
 
   if (!port) {
-    port = await portfinder.getPortPromise({ startPort: 8000, stopPort: 9999 });
+    port = await portfinder.getPortPromise({ startPort: 8000 });
   }
 
   const proxyAddress = await createProxyServer({ ip, port, app: expressApp });
